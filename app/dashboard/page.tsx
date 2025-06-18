@@ -5,6 +5,7 @@ import { DashboardLayout } from "@/components/layout/dashboard-layout"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Car, Users, CheckSquare, AlertTriangle, Calendar, TrendingUp } from "lucide-react"
+import { getDashboardStats, mockBookingRequests, mockIssues } from "@/lib/mock-data"
 
 interface User {
   name: string
@@ -23,26 +24,28 @@ export default function DashboardPage() {
     }
   }, [])
 
+  const dashboardStats = getDashboardStats()
+
   const stats = [
     {
       title: "Total Vehicles",
-      value: "12",
-      description: "3 available now",
+      value: dashboardStats.totalVehicles.toString(),
+      description: `${dashboardStats.availableVehicles} available now`,
       icon: Car,
       color: "text-blue-600",
       bgColor: "bg-blue-100",
     },
     {
       title: "Active Bookings",
-      value: "8",
-      description: "2 pending approval",
+      value: dashboardStats.activeBookings.toString(),
+      description: `${dashboardStats.pendingApprovals} pending approval`,
       icon: Calendar,
       color: "text-green-600",
       bgColor: "bg-green-100",
     },
     {
       title: "Pending Approvals",
-      value: "5",
+      value: dashboardStats.pendingApprovals.toString(),
       description: "Requires attention",
       icon: CheckSquare,
       color: "text-orange-600",
@@ -50,43 +53,23 @@ export default function DashboardPage() {
     },
     {
       title: "Open Issues",
-      value: "2",
-      description: "1 critical",
+      value: dashboardStats.openIssues.toString(),
+      description: `${mockIssues.filter((i) => i.priority === "Critical").length} critical`,
       icon: AlertTriangle,
       color: "text-red-600",
       bgColor: "bg-red-100",
     },
   ]
 
-  const recentBookings = [
-    {
-      id: 1,
-      vehicle: "Toyota Hiace",
-      user: "John Smith",
-      department: "Sales",
-      date: "2024-01-15",
-      status: "Approved",
-      purpose: "Client meeting",
-    },
-    {
-      id: 2,
-      vehicle: "Honda City",
-      user: "Sarah Johnson",
-      department: "Marketing",
-      date: "2024-01-16",
-      status: "Pending",
-      purpose: "Site visit",
-    },
-    {
-      id: 3,
-      vehicle: "Mitsubishi L300",
-      user: "Mike Wilson",
-      department: "Operations",
-      date: "2024-01-17",
-      status: "Rejected",
-      purpose: "Equipment transport",
-    },
-  ]
+  const recentBookings = mockBookingRequests.slice(0, 5).map((booking) => ({
+    id: booking.id,
+    vehicle: booking.vehicle.name,
+    user: booking.requester.name,
+    department: booking.requester.department,
+    date: booking.dateFrom,
+    status: booking.status,
+    purpose: booking.purpose.substring(0, 50) + "...",
+  }))
 
   const getStatusColor = (status: string) => {
     switch (status) {

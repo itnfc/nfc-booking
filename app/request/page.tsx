@@ -14,6 +14,10 @@ import { Badge } from "@/components/ui/badge"
 import { Calendar, Users, Car } from "lucide-react"
 import Image from "next/image"
 
+// Update the vehicle request page to use comprehensive mock data
+
+import { mockVehicles } from "@/lib/mock-data"
+
 interface User {
   name: string
   email: string
@@ -45,40 +49,15 @@ export default function RequestPage() {
     purpose: "",
   })
 
-  const vehicles: Vehicle[] = [
-    {
-      id: 1,
-      name: "Toyota Hiace",
-      capacity: 12,
-      status: "Available",
-      image: "/placeholder.svg?height=200&width=300",
-      features: ["Air Conditioning", "GPS", "First Aid Kit"],
-    },
-    {
-      id: 2,
-      name: "Honda City",
-      capacity: 4,
-      status: "Available",
-      image: "/placeholder.svg?height=200&width=300",
-      features: ["Air Conditioning", "GPS", "Bluetooth"],
-    },
-    {
-      id: 3,
-      name: "Mitsubishi L300",
-      capacity: 8,
-      status: "Maintenance",
-      image: "/placeholder.svg?height=200&width=300",
-      features: ["Air Conditioning", "Cargo Space"],
-    },
-    {
-      id: 4,
-      name: "Toyota Innova",
-      capacity: 7,
-      status: "Available",
-      image: "/placeholder.svg?height=200&width=300",
-      features: ["Air Conditioning", "GPS", "USB Charging"],
-    },
-  ]
+  // Replace the vehicles array with:
+  const vehicles = mockVehicles.map((vehicle) => ({
+    id: vehicle.id,
+    name: vehicle.name,
+    capacity: vehicle.capacity,
+    status: vehicle.status,
+    image: vehicle.images.exterior[0],
+    features: vehicle.features,
+  }))
 
   useEffect(() => {
     const userData = localStorage.getItem("user")

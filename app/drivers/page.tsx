@@ -17,6 +17,7 @@ import {
 } from "@/components/ui/dialog"
 import { Star, Calendar, Camera, Upload, Search, Filter, User } from "lucide-react"
 import Image from "next/image"
+import { mockDrivers } from "@/lib/mock-data"
 
 interface AppUser {
   name: string
@@ -67,103 +68,15 @@ export default function DriversPage() {
   const [selectedDriver, setSelectedDriver] = useState<Driver | null>(null)
 
   // Mock data
-  const mockDrivers: Driver[] = [
-    {
-      id: 1,
-      name: "Jane Driver",
-      email: "jane.driver@company.com",
-      phone: "+1234567890",
-      avatar: "/placeholder.svg?height=100&width=100",
-      licenseNumber: "DL-123456789",
-      licenseType: "Professional",
-      licenseExpiry: "2025-12-31",
-      licensePhoto: "/placeholder.svg?height=200&width=300",
-      totalTrips: 150,
-      totalDistance: 25000.5,
-      evaluationScore: 4.8,
-      status: "Active",
-      joinDate: "2022-03-15",
-      violations: [],
-      recentTrips: [
-        {
-          id: 1,
-          date: "2024-01-15",
-          vehicle: "Toyota Hiace",
-          destination: "Downtown Office",
-          distance: 45.2,
-        },
-        {
-          id: 2,
-          date: "2024-01-12",
-          vehicle: "Honda City",
-          destination: "Client Meeting",
-          distance: 28.7,
-        },
-      ],
-      gallery: [
-        {
-          id: 1,
-          type: "license",
-          url: "/placeholder.svg?height=200&width=300",
-          caption: "Professional Driver License",
-          date: "2024-01-01",
-          tags: ["license", "professional"],
-        },
-        {
-          id: 2,
-          type: "condition",
-          url: "/placeholder.svg?height=200&width=300",
-          caption: "Vehicle condition before trip",
-          date: "2024-01-15",
-          tags: ["condition", "before"],
-        },
-      ],
-    },
-    {
-      id: 2,
-      name: "Mike Rodriguez",
-      email: "mike.rodriguez@company.com",
-      phone: "+1234567891",
-      avatar: "/placeholder.svg?height=100&width=100",
-      licenseNumber: "DL-987654321",
-      licenseType: "Standard",
-      licenseExpiry: "2024-08-15",
-      licensePhoto: "/placeholder.svg?height=200&width=300",
-      totalTrips: 89,
-      totalDistance: 15600.3,
-      evaluationScore: 4.2,
-      status: "Active",
-      joinDate: "2023-01-20",
-      violations: ["Speeding - Minor"],
-      recentTrips: [
-        {
-          id: 3,
-          date: "2024-01-14",
-          vehicle: "Mitsubishi L300",
-          destination: "Warehouse",
-          distance: 32.1,
-        },
-      ],
-      gallery: [
-        {
-          id: 3,
-          type: "license",
-          url: "/placeholder.svg?height=200&width=300",
-          caption: "Standard Driver License",
-          date: "2023-01-20",
-          tags: ["license", "standard"],
-        },
-      ],
-    },
-  ]
+  const mockDriversData = mockDrivers
 
   useEffect(() => {
     const userData = localStorage.getItem("user")
     if (userData) {
       setUser(JSON.parse(userData))
     }
-    setDrivers(mockDrivers)
-    setFilteredDrivers(mockDrivers)
+    setDrivers(mockDriversData)
+    setFilteredDrivers(mockDriversData)
   }, [])
 
   useEffect(() => {

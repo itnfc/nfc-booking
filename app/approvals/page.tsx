@@ -19,6 +19,7 @@ import {
 } from "@/components/ui/dialog"
 import { CheckSquare, X, Check, Calendar, Users, Clock, Search, Filter } from "lucide-react"
 import Image from "next/image"
+import { mockBookingRequests } from "@/lib/mock-data"
 
 interface User {
   name: string
@@ -62,77 +63,7 @@ export default function ApprovalsPage() {
   const [comment, setComment] = useState("")
 
   // Mock data
-  const mockRequests: BookingRequest[] = [
-    {
-      id: 1,
-      requester: {
-        name: "John Smith",
-        department: "Sales",
-        email: "john.smith@company.com",
-        avatar: "/placeholder.svg?height=40&width=40",
-      },
-      vehicle: {
-        name: "Toyota Hiace",
-        image: "/placeholder.svg?height=100&width=150",
-        capacity: 12,
-      },
-      dateFrom: "2024-01-20",
-      dateTo: "2024-01-20",
-      timeFrom: "09:00",
-      timeTo: "17:00",
-      passengers: 8,
-      purpose: "Client presentation and site visit to showcase our new products",
-      status: "Pending",
-      submittedAt: "2024-01-15T10:30:00",
-      phone: "+1234567890",
-    },
-    {
-      id: 2,
-      requester: {
-        name: "Sarah Johnson",
-        department: "Marketing",
-        email: "sarah.johnson@company.com",
-        avatar: "/placeholder.svg?height=40&width=40",
-      },
-      vehicle: {
-        name: "Honda City",
-        image: "/placeholder.svg?height=100&width=150",
-        capacity: 4,
-      },
-      dateFrom: "2024-01-22",
-      dateTo: "2024-01-22",
-      timeFrom: "14:00",
-      timeTo: "18:00",
-      passengers: 2,
-      purpose: "Meeting with advertising agency for new campaign",
-      status: "Pending",
-      submittedAt: "2024-01-16T14:20:00",
-      phone: "+1234567891",
-    },
-    {
-      id: 3,
-      requester: {
-        name: "Mike Wilson",
-        department: "Operations",
-        email: "mike.wilson@company.com",
-        avatar: "/placeholder.svg?height=40&width=40",
-      },
-      vehicle: {
-        name: "Mitsubishi L300",
-        image: "/placeholder.svg?height=100&width=150",
-        capacity: 8,
-      },
-      dateFrom: "2024-01-25",
-      dateTo: "2024-01-25",
-      timeFrom: "08:00",
-      timeTo: "16:00",
-      passengers: 4,
-      purpose: "Equipment delivery to branch office",
-      status: "Approved",
-      submittedAt: "2024-01-14T09:15:00",
-      phone: "+1234567892",
-    },
-  ]
+  const mockRequests = mockBookingRequests
 
   useEffect(() => {
     const userData = localStorage.getItem("user")

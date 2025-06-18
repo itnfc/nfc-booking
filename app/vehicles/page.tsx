@@ -17,6 +17,7 @@ import {
 } from "@/components/ui/dialog"
 import { Car, Users, Upload, Search, Filter, Plus } from "lucide-react"
 import Image from "next/image"
+import { mockVehicles } from "@/lib/mock-data"
 
 interface User {
   name: string
@@ -70,119 +71,15 @@ export default function VehiclesPage() {
   const [selectedVehicle, setSelectedVehicle] = useState<Vehicle | null>(null)
 
   // Mock data
-  const mockVehicles: Vehicle[] = [
-    {
-      id: 1,
-      name: "Toyota Hiace",
-      registration: "ABC-1234",
-      capacity: 12,
-      status: "Available",
-      images: {
-        exterior: ["/placeholder.svg?height=200&width=300", "/placeholder.svg?height=200&width=300"],
-        interior: ["/placeholder.svg?height=200&width=300"],
-        documents: ["/placeholder.svg?height=200&width=300"],
-      },
-      specifications: {
-        make: "Toyota",
-        model: "Hiace",
-        year: 2020,
-        fuelType: "Diesel",
-        transmission: "Manual",
-        mileage: 45000,
-      },
-      maintenanceLog: [
-        {
-          id: 1,
-          date: "2024-01-10",
-          type: "Regular Service",
-          description: "Oil change, filter replacement, general inspection",
-          cost: 150,
-          beforePhoto: "/placeholder.svg?height=150&width=200",
-          afterPhoto: "/placeholder.svg?height=150&width=200",
-        },
-        {
-          id: 2,
-          date: "2023-12-15",
-          type: "Tire Replacement",
-          description: "Replaced all four tires due to wear",
-          cost: 400,
-        },
-      ],
-    },
-    {
-      id: 2,
-      name: "Honda City",
-      registration: "XYZ-5678",
-      capacity: 4,
-      status: "In Use",
-      images: {
-        exterior: ["/placeholder.svg?height=200&width=300"],
-        interior: ["/placeholder.svg?height=200&width=300"],
-        documents: ["/placeholder.svg?height=200&width=300"],
-      },
-      specifications: {
-        make: "Honda",
-        model: "City",
-        year: 2019,
-        fuelType: "Gasoline",
-        transmission: "Automatic",
-        mileage: 32000,
-      },
-      maintenanceLog: [
-        {
-          id: 3,
-          date: "2024-01-05",
-          type: "Brake Service",
-          description: "Brake pad replacement and brake fluid change",
-          cost: 200,
-        },
-      ],
-      currentBooking: {
-        user: "John Smith",
-        startDate: "2024-01-15",
-        endDate: "2024-01-15",
-        purpose: "Client meeting",
-      },
-    },
-    {
-      id: 3,
-      name: "Mitsubishi L300",
-      registration: "DEF-9012",
-      capacity: 8,
-      status: "Maintenance",
-      images: {
-        exterior: ["/placeholder.svg?height=200&width=300"],
-        interior: ["/placeholder.svg?height=200&width=300"],
-        documents: ["/placeholder.svg?height=200&width=300"],
-      },
-      specifications: {
-        make: "Mitsubishi",
-        model: "L300",
-        year: 2018,
-        fuelType: "Diesel",
-        transmission: "Manual",
-        mileage: 78000,
-      },
-      maintenanceLog: [
-        {
-          id: 4,
-          date: "2024-01-12",
-          type: "Engine Repair",
-          description: "Engine overhaul and transmission service",
-          cost: 1200,
-          beforePhoto: "/placeholder.svg?height=150&width=200",
-        },
-      ],
-    },
-  ]
+  const mockVehiclesData = mockVehicles
 
   useEffect(() => {
     const userData = localStorage.getItem("user")
     if (userData) {
       setUser(JSON.parse(userData))
     }
-    setVehicles(mockVehicles)
-    setFilteredVehicles(mockVehicles)
+    setVehicles(mockVehiclesData)
+    setFilteredVehicles(mockVehiclesData)
   }, [])
 
   useEffect(() => {
